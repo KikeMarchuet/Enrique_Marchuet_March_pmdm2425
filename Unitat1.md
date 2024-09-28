@@ -1,5 +1,5 @@
-# Pràctica 1
-## Anàlisi de l'estructura del projecte
+# Pràctica 1 - App Comptador
+## 1. Anàlisi de l'estructura del projecte
 El que tenim és un projecte de Android, que està seguent desenvolupat en el llenguatge Kotlin, des de l'entorn Android Studio.
 
 Conté una *Activitat* amb un *TextView*, que mostra un valor de comptador, i un *Botó*. Al pulsar-lo, el valor del comptador que es mostra s'incrementarà en una unitat cada vegada.
@@ -17,25 +17,57 @@ Els arxius més importants, que podem destacar dins l'estructura de arxius del p
    Els layouts gestionen la interacció entre l'usuari i l'aplicació i es defineixen en fitxers XML, com podem veure a la imatge anterior
 
 3. El **AndroidManifest.xml** (app -> src -> main -> res): És on es declara la informació bàsica de l'aplicació.
+
     - Les activitats, serveis i components que formaran part de l'aplicació
     - Els permisos que es necessitaran
     - La activitat principal que es llançarà quan comence l'aplicació
     - Versions mínimes d'Android que es requereixen
 
-## Análisi del cicle de vida i el problema de la pèrdua d'estat
+## 2. Análisi del cicle de vida i el problema de la pèrdua d'estat
 
 El cicle de vida defineix els diferents estats pels quals passa, des de que es crea fins que es tanca.
 
 Cada estat pel que passem, desencadena un mètode que es crida automàticament quan entrem en ell. Els que podem destacar són:
-    - onCreate(): Que es posa en marxa quan es crea l'activitat.
-    - onStart(): En este cas, seria quan es fa visible l'activitat per al usuari.
-    - onResume(): Quan l'activitat comença a estar en primer pla i es pot interactuar amb ella.
-    - onPause(): Es posaria en marxa just abans de estar oculta.
-    - onStop(): En este cas, se executa quan ja ha passat a ser no visible per al usuari.
-    - onDestroy(): Este mètode es posa en marxa just abans de tancar completament l'activitat.
 
+- onCreate(): Que es posa en marxa quan es crea l'activitat.
+- onStart(): En este cas, seria quan es fa visible l'activitat per al usuari.
+- onResume(): Quan l'activitat comença a estar en primer pla i es pot interactuar amb ella.
+- onPause(): Es posaria en marxa just abans de estar oculta.
+- onStop(): En este cas, se executa quan ja ha passat a ser no visible per al usuari.
+- onDestroy(): Este mètode es posa en marxa just abans de tancar completament l'activitat.
 
+Per a poder-ho analitzar, el que farem és implementar cadascun d'eixos mètodes amb un missatge que s'imprimirà al LogCat. D'esta manera podrem veure per quins estats passa la nostra aplicació
 
-## Solució a la pèrdua d'estat
-## Ampliant la funcionalitat amb decrements i Reset
-## Canvis per implementar el View Binding
+> override fun onStart() {  
+> super.onStart()  
+> Log.d(TAG, "Al mètode onStart")  
+> }  
+>
+> override fun onResume() {  
+> super.onResume()  
+> Log.d(TAG, "Al mètode onResume")  
+> }  
+>
+> override fun onPause() {  
+> super.onPause()  
+> Log.d(TAG, "Al mètode onPause")  
+> }  
+>
+> override fun onStop() {  
+> super.onStop()  
+> Log.d(TAG, "Al mètode onStop")  
+> }  
+>
+> override fun onRestart() {  
+> super.onRestart()  
+> Log.d(TAG, "Al mètode onRestart")  
+> }  
+>
+> override fun onDestroy() {  
+> super.onDestroy()  
+> Log.d(TAG, "Al mètode onDestroy")  
+> }  
+
+## 3. Solució a la pèrdua d'estat
+## 4. Ampliant la funcionalitat amb decrements i Reset
+## 5. Canvis per implementar el View Binding

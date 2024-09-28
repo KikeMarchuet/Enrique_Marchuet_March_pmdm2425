@@ -68,6 +68,10 @@ Per a poder-ho analitzar, el que farem és implementar cadascun d'eixos mètodes
 > Log.d(TAG, "Al mètode onDestroy")  
 > }  
 
+El que s'observa és que amb un canvi de configuració, com ara el gir de pantalla, Android destrueix l'activitat i la torna a crear per tal de adaptar-se a eixe canvi. Aleshores, els valors dels atributs, com és el valor del comptador en el nostre cas, es perden i torna a partir del valor inicial, que era zero.
+
+Això és algo que a les nostres aplicacions hem de poder gestionar per tal de que es mantinguen els valors que necessitem conservar.
+
 ## 3. Solució a la pèrdua d'estat
 ## 4. Ampliant la funcionalitat amb decrements i Reset
 ## 5. Canvis per implementar el View Binding

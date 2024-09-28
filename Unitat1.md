@@ -22,7 +22,20 @@ Els arxius més importants, que podem destacar dins l'estructura de arxius del p
     - La activitat principal que es llançarà quan comence l'aplicació
     - Versions mínimes d'Android que es requereixen
 
-## Análisi del clicle de vida i el problema de la pèrdua d'estat
+## Análisi del cicle de vida i el problema de la pèrdua d'estat
+
+El cicle de vida defineix els diferents estats pels quals passa, des de que es crea fins que es tanca.
+
+Cada estat pel que passem, desencadena un mètode que es crida automàticament quan entrem en ell. Els que podem destacar són:
+    - onCreate(): Que es posa en marxa quan es crea l'activitat.
+    - onStart(): En este cas, seria quan es fa visible l'activitat per al usuari.
+    - onResume(): Quan l'activitat comença a estar en primer pla i es pot interactuar amb ella.
+    - onPause(): Es posaria en marxa just abans de estar oculta.
+    - onStop(): En este cas, se executa quan ja ha passat a ser no visible per al usuari.
+    - onDestroy(): Este mètode es posa en marxa just abans de tancar completament l'activitat.
+
+
+
 ## Solució a la pèrdua d'estat
 ## Ampliant la funcionalitat amb decrements i Reset
 ## Canvis per implementar el View Binding

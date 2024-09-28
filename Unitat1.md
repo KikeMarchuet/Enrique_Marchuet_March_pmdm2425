@@ -23,6 +23,14 @@ Els arxius més importants, que podem destacar dins l'estructura de arxius del p
     - La activitat principal que es llançarà quan comence l'aplicació
     - Versions mínimes d'Android que es requereixen
 
+Una *Activitat* té la següent estructura:
+
+* **Package**: Per a especificar el paquet al que pertany la classe de l'activitat.
+* **Import**: Per a incluir clases i components que no estan en eixe paquet i als que l'activitat necessita accedir.
+* Implementació de la **Classe** propiament:
+    - Declaració dels **Atributs**
+    - Implementació dels **Mètodes**
+    
 ## 2. Análisi del cicle de vida i el problema de la pèrdua d'estat
 
 El cicle de vida defineix els diferents estats pels quals passa, des de que es crea fins que es tanca.

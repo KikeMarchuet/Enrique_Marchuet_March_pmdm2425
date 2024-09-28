@@ -38,35 +38,36 @@ Cada estat pel que passem, desencadena un mètode que es crida automàticament q
 
 Per a poder-ho analitzar, el que farem és implementar cadascun d'eixos mètodes amb un missatge que s'imprimirà al LogCat. D'esta manera podrem veure per quins estats passa la nostra aplicació
 
-> override fun onStart() {  
-> super.onStart()  
-> Log.d(TAG, "Al mètode onStart")  
-> }  
->
-> override fun onResume() {  
-> super.onResume()  
-> Log.d(TAG, "Al mètode onResume")  
-> }  
->
-> override fun onPause() {  
-> super.onPause()  
-> Log.d(TAG, "Al mètode onPause")  
-> }  
->
-> override fun onStop() {  
-> super.onStop()  
-> Log.d(TAG, "Al mètode onStop")  
-> }  
->
-> override fun onRestart() {  
-> super.onRestart()  
-> Log.d(TAG, "Al mètode onRestart")  
-> }  
->
-> override fun onDestroy() {  
-> super.onDestroy()  
-> Log.d(TAG, "Al mètode onDestroy")  
-> }  
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "Al mètode onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "Al mètode onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "Al mètode onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "Al mètode onStop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "Al mètode onRestart")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "Al mètode onDestroy")
+    }
 
 El que s'observa és que amb un canvi de configuració, com ara el gir de pantalla, Android destrueix l'activitat i la torna a crear per tal de adaptar-se a eixe canvi. Aleshores, els valors dels atributs, com és el valor del comptador en el nostre cas, es perden i torna a partir del valor inicial, que era zero.
 
@@ -74,4 +75,88 @@ Això és algo que a les nostres aplicacions hem de poder gestionar per tal de q
 
 ## 3. Solució a la pèrdua d'estat
 ## 4. Ampliant la funcionalitat amb decrements i Reset
+
+Per tal d'implementar eixa funcionalitat nova, cal actualitzar el *Layout* per tal de mostrar eixos nous dos botons. Afegim per tant el següent codi al XML del Layout. Els elements que tindriem aleshores serien:
+
+<TextView
+        android:id="@+id/textViewComptador"
+        android:layout_width="338dp"
+        android:layout_height="276dp"
+        android:fontFamily="sans-serif-black"
+        android:textAlignment="center"
+        android:textSize="178sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.255" />
+
+    <Button
+        android:id="@+id/btResta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btReset"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewComptador" />
+
+    <Button
+        android:id="@+id/btReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btAdd"
+        app:layout_constraintStart_toEndOf="@+id/btResta"
+        app:layout_constraintTop_toBottomOf="@+id/textViewComptador" />
+
+    <Button
+        android:id="@+id/btAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btReset"
+        app:layout_constraintTop_toBottomOf="@+id/textViewComptador" />
+
+    <Button
+        android:id="@+id/btOpen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open Activity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btReset" />
+
+Els pas següent seria tindre unes variables que feren referència als nous botons del Layout:
+
+        // Referencia al botón de restar, añadido
+        val btResta=findViewById<Button>(R.id.btResta)
+        // Referencia al botón Reset añadido
+        val btReset=findViewById<Button>(R.id.btReset)
+
+I ja per a acabar, caldria implementar els dos nous mètodes, el de restar una unitat al comptador i el de resetejar el valor del comptador i establir-lo a zero de nou:
+
+        // Asociaciamos una expresión lambda como
+        // respuesta (callback) al evento Clic sobre
+        // el botón
+        btResta.setOnClickListener {
+            comptador--
+            textViewContador.text=comptador.toString()
+        }
+
+        // Asociaciamos una expresión lambda como
+        // respuesta (callback) al evento Clic sobre
+        // el botón
+        btReset.setOnClickListener {
+            comptador = 0
+            textViewContador.text=comptador.toString()
+        }
+
 ## 5. Canvis per implementar el View Binding

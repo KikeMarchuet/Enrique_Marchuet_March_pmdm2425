@@ -221,9 +221,9 @@ Els passos a seguir serien els següents:
 
 1. Abans de res, hem de Activar el ViewBinding a les buildFeatures de l'script Gradle del mòdul, afegint este bloc:
 
-    buildFeatures {
-        viewBinding = true
-    }
+        buildFeatures {
+           viewBinding = true
+        }
 
 <img width="725" alt="image" src="https://github.com/user-attachments/assets/1e1882b7-6fbf-42ab-815d-708b75fad214">
 
@@ -235,8 +235,34 @@ Els passos a seguir serien els següents:
 
         import com.pmdm.ieseljust.comptador.databinding.ActivityMainBinding
 
+4. Declarar l'objecte (binding) que accedirà a aquesta classe (generalment com a lateinit) i definir-lo mitjançant l'unflat de la vista. Afegirem les següents línees de codi a la nostra activitat:
 
+        // Declarem l'objecte de vinculació
+        private lateinit var binding: ActivityMainBinding
 
+        // Inicialitzem l'objecte de vinculació inflant la vista
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
+5. Modificar el SetContentView per afegir-lo l'arrel del binding (binding.root). Afegim esta línea de codi:
 
+        setContentView(binding.root)
 
+6. Accedir als elements de la interfície a través d'aquest objecte de vinculació. Deixe a propòsit comentades les línees que utilitzavem abans i les que passe a gastar ara ja amb el View Binding, que lògicament, ho fa molt més còmode:
+   
+        btAdd.setOnClickListener {
+            comptador++
+            // textViewContador.text=comptador.toString()
+            binding.textViewComptador.text = comptador.toString()
+        }
+
+           btResta.setOnClickListener {
+            comptador--
+            // textViewContador.text=comptador.toString()
+            binding.textViewComptador.text = comptador.toString()
+        }
+
+           btReset.setOnClickListener {
+            comptador = 0
+            // textViewContador.text=comptador.toString()
+            binding.textViewComptador.text = comptador.toString()
+        }   

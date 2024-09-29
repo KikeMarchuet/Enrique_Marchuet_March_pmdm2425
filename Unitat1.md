@@ -95,16 +95,32 @@ Això és algo que a les nostres aplicacions hem de poder gestionar per tal de q
 
 ## 3. Solució a la pèrdua d'estat
 
-La solució a la pèrdua d'estat radica en fer ús del **ViewModel**.
+La solució a la pèrdua d'estat radica en fer ús del **Bundle**.
 
-Sense el ViewModel, les activitats i fragments tenen un cicle de vida molt curt, i es destrueixen amb alta freqüència degut a l'administració de recursos que fa el sistema operatiu de l'Android.
+El bundle ens permet *guardar* l'estat d'una activitat just abans de destruir-la, i també ens permet restaurar l'estat quan es torna a recrear l'activitat.
 
-El ViewModel proporciona una forma de guardar el estat mentres la interfície d'usuari fa el canvi, i per tant assegura que les dades es mantinguen fins que l'activitat o fragment es recrea.
+Per a poder-ho aconseguir he hagut de crear estos dos mètodes. El primer és el que ens guardarà l'estat. *Estat* serà el bundle que guardarà el valor en format de clave-valor. Com a clave li pose el nom "Comptador" i el valor que adquirirà eixa clau és el valor que en eixe moment tinga el nostre comptador.
 
+Quan l'activitat es torne a recrear, es posarà en marxa eixe segon mètode que restablirà el atribut *comptador* al valor que teníem en el valor de la clau del Bundle:
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+    override fun onSaveInstanceState(estat: Bundle) {
+        super.onSaveInstanceState(estat)
+        estat.putInt("Comptador", comptador)
+    }
+
+    override fun onRestoreInstanceState(estat: Bundle) {
+        super.onSaveInstanceState(estat)
+        comptador = estat.getInt("Comptador")
+        val textViewContador=findViewById<TextView>(R.id.textViewComptador)
+        textViewContador.text=comptador.toString()
+    }
+
+Eixes últimes dos línees de codi, fan falta per a *refrescar* el valor en pantalla. De no posar-les, la variable comptador era restablida, però no t'adonaves fins que pulsaves algun dels botons per a canviar el valor del comptador:
+
+        val textViewContador=findViewById<TextView>(R.id.textViewComptador)
+        textViewContador.text=comptador.toString()
+
+Amb la primera línea, asigne a eixa variable la referència a l'element *TextView* en que mostrem el valor del comptador. Amb la segona línea actualitze el valor que mostra eixte *TextView* amb el valor del comptador recuperat. 
 
 ## 4. Ampliant la funcionalitat amb decrements i Reset
 
@@ -190,5 +206,7 @@ I ja per a acabar, caldria implementar els dos nous mètodes, el de restar una u
             comptador = 0
             textViewContador.text=comptador.toString()
         }
+
+Ara ja tenim la aplicació funcionant amb l'increment, decrement i reseteig, i tot el funcionament és correcte independentment de si canviem la configuració fent ús del gir d'orientació de vertical a horitzontal o viceversa.
 
 ## 5. Canvis per implementar el View Binding

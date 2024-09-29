@@ -87,6 +87,10 @@ Per a poder-ho analitzar, el que farem és implementar cadascun d'eixos mètodes
 
 El que s'observa és que amb un canvi de configuració, com ara el gir de pantalla, Android destrueix l'activitat i la torna a crear per tal de adaptar-se a eixe canvi. Aleshores, els valors dels atributs, com és el valor del comptador en el nostre cas, es perden i torna a partir del valor inicial, que era zero.
 
+<img width="185" alt="image" src="https://github.com/user-attachments/assets/b2af4276-6c25-4516-a32b-a695f1f11684">
+
+<img width="350" alt="image" src="https://github.com/user-attachments/assets/b7a8e2cf-d681-4f4a-87d7-735b59ad5258">
+
 Això és algo que a les nostres aplicacions hem de poder gestionar per tal de que es mantinguen els valors que necessitem conservar.
 
 ## 3. Solució a la pèrdua d'estat
@@ -96,6 +100,11 @@ La solució a la pèrdua d'estat radica en fer ús del **ViewModel**.
 Sense el ViewModel, les activitats i fragments tenen un cicle de vida molt curt, i es destrueixen amb alta freqüència degut a l'administració de recursos que fa el sistema operatiu de l'Android.
 
 El ViewModel proporciona una forma de guardar el estat mentres la interfície d'usuari fa el canvi, i per tant assegura que les dades es mantinguen fins que l'activitat o fragment es recrea.
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
 ## 4. Ampliant la funcionalitat amb decrements i Reset
 

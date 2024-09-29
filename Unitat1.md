@@ -30,6 +30,14 @@ Una *Activitat* té la següent estructura:
 * Implementació de la **Classe** propiament:
     - Declaració dels **Atributs**
     - Implementació dels **Mètodes**
+ 
+Crear una *Activitat* implica:
+
+* Crear el fitxer **Kotlin** amb la classe
+* Crear el fitxer **Layout** amb els components visuals que necessitem que apareguen
+* Declarar eixa Activitat dins el fitxer **AndroidMainfest.xml**
+
+Per tant, **no** seria suficient comptar amb eixos dos fitxers que indicava l'enunciat, si la activitat no es declara també dins del Manifest.
     
 ## 2. Análisi del cicle de vida i el problema de la pèrdua d'estat
 

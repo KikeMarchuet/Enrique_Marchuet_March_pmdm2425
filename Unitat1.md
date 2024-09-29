@@ -216,3 +216,27 @@ I ja per a acabar, caldria implementar els dos nous mètodes, el de restar una u
 Ara ja tenim la aplicació funcionant amb l'increment, decrement i reseteig, i tot el funcionament és correcte independentment de si canviem la configuració fent ús del gir d'orientació de vertical a horitzontal o viceversa.
 
 ## 5. Canvis per implementar el View Binding
+
+Els passos a seguir serien els següents:
+
+1. Abans de res, hem de Activar el ViewBinding a les buildFeatures de l'script Gradle del mòdul, afegint este bloc:
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+<img width="725" alt="image" src="https://github.com/user-attachments/assets/1e1882b7-6fbf-42ab-815d-708b75fad214">
+
+2. Sincronitzar el projecte amb aquest script, per a que genere les classes de vinculació. Seleccionem la següent opció dins de Android Studio:
+
+<img width="270" alt="image" src="https://github.com/user-attachments/assets/673fb8be-ab0a-41ce-a4c0-95c6ceb73a17">
+
+3. Importar la classe de vinculació en el fitxer de la classe on l'anem a utilitzar. Per a lo qual, dins de la *MainActivity* afegirem la línea per a importar-la:
+
+        import com.pmdm.ieseljust.comptador.databinding.ActivityMainBinding
+
+
+
+
+
+

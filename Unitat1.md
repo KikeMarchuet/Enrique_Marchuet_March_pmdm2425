@@ -87,6 +87,12 @@ Per a poder-ho analitzar, el que farem és implementar cadascun d'eixos mètodes
 
 El que s'observa és que amb un canvi de configuració, com ara el gir de pantalla, Android destrueix l'activitat i la torna a crear per tal de adaptar-se a eixe canvi. Aleshores, els valors dels atributs, com és el valor del comptador en el nostre cas, es perden i torna a partir del valor inicial, que era zero.
 
+És a dir, l'activitat, passa per:
+
+* onCreate() -> onStart() -> onResume()
+* En eixe moment, canviem la configuració, mitjançant el gir de pantalla, i passa per:
+* onPause() -> onStop() -> onDestroy()
+
 <img width="185" alt="image" src="https://github.com/user-attachments/assets/b2af4276-6c25-4516-a32b-a695f1f11684">
 
 <img width="350" alt="image" src="https://github.com/user-attachments/assets/b7a8e2cf-d681-4f4a-87d7-735b59ad5258">
